@@ -31,8 +31,6 @@ exports.login = (req, res) => {
   if (!email || !password)
     return res.status(400).json({ message: 'All fields required' });
 
-  db.query('UPDATE users SET last_login = NOW() WHERE id = ?', [user.id])
-
   db.query('SELECT * FROM users WHERE email = ?', [email], (err, results) => {
     if (err) return res.status(500).json({ message: 'DB error' });
     if (results.length === 0) return res.status(404).json({ message: 'User not found' });
@@ -40,6 +38,9 @@ exports.login = (req, res) => {
     const user = results[0];
     if (!bcrypt.compareSync(password, user.password))
       return res.status(401).json({ message: 'Invalid password' });
+
+    // Update last_login AFTER user is found
+    db.query('UPDATE users SET last_login = NOW() WHERE id = ?', [user.id]);
 
     const token = jwt.sign(
       { id: user.id, role: user.role },
