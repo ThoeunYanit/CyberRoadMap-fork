@@ -9,6 +9,8 @@ import Dashboard from './pages/Dashboard'
 import Specialist from './pages/Specialist'
 import Profile from './pages/Profile'
 import Admin from './pages/Admin'
+import VerifyOTP from './pages/VerifyOTP'
+
 
 const PrivateRoute = ({ children }) => {
   const token = localStorage.getItem('token')
@@ -38,6 +40,7 @@ export default function App() {
       <Route path="/specialist/:slug" element={<PrivateRoute><Specialist /></PrivateRoute>} />
       <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
       <Route path="/admin" element={<AdminRoute><Admin /></AdminRoute>} />
+      <Route path="/verify-otp" element={<VerifyOTP />} />
     </Routes>
   )
 }
