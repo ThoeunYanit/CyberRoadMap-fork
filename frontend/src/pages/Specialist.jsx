@@ -57,7 +57,7 @@ export default function Specialist() {
 
   const handleLevelChange = (index) => {
     setActiveLevel(index)
-    setExpandedProjects({}) // reset expanded state on level change
+    setExpandedProjects({})
     loadLevelContent(levels[index].id)
   }
 
@@ -72,15 +72,12 @@ export default function Specialist() {
   const levelColors = ['#64ffda', '#4fc3f7', '#f093fb', '#f5576c']
   const levelIcons = ['🌱', '⚡', '🔥', '👑']
 
-  // Parse description into lines
   const parseDesc = (text) => {
     if (!text) return []
     return text.split('\n').map(line => line.trim()).filter(Boolean)
   }
-
   const isHeader = (line) => line.startsWith('**') && line.endsWith('**')
   const stripBold = (line) => line.replace(/\*\*/g, '')
-  const isNumbered = (line) => /^\d+\./.test(line)
 
   return (
     <div style={{ minHeight: '100vh', background: t.bg, color: t.text, fontFamily: "'Rajdhani', sans-serif", overflowX: 'hidden', position: 'relative', transition: 'all 0.3s' }}>
@@ -90,7 +87,6 @@ export default function Specialist() {
 
         @keyframes floatUp { 0%,100%{transform:translateY(0) rotate(0deg);opacity:0.4} 50%{transform:translateY(-25px) rotate(180deg);opacity:0.7} }
         @keyframes fadeSlideUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
-        @keyframes fadeSlideDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
         @keyframes glowPulse { 0%,100%{box-shadow:0 0 15px ${t.tealDim}} 50%{box-shadow:0 0 35px ${t.tealMid}} }
 
         @keyframes slideDown {
@@ -102,26 +98,14 @@ export default function Specialist() {
           to   { opacity: 0; max-height: 0; transform: translateY(-6px); }
         }
 
-        .desc-open {
-          animation: slideDown 0.35s ease forwards;
-          overflow: hidden;
-        }
-        .desc-close {
-          animation: slideUp 0.25s ease forwards;
-          overflow: hidden;
-          pointer-events: none;
-        }
+        .desc-open  { animation: slideDown 0.35s ease forwards; overflow: hidden; }
+        .desc-close { animation: slideUp 0.25s ease forwards; overflow: hidden; pointer-events: none; }
 
         .proj-arrow {
           transition: transform 0.3s ease;
-          font-size: 0.75rem;
-          opacity: 0.6;
-          display: inline-block;
+          font-size: 0.75rem; opacity: 0.6; display: inline-block;
         }
-        .proj-arrow.open {
-          transform: rotate(180deg);
-          opacity: 1;
-        }
+        .proj-arrow.open { transform: rotate(180deg); opacity: 1; }
 
         .proj-row {
           display: flex; align-items: center; gap: 1rem;
@@ -131,6 +115,38 @@ export default function Specialist() {
         }
         .proj-row.clickable { cursor: pointer; }
         .proj-row.clickable:hover { background: ${t.tealDim}; }
+
+        .proj-card {
+          border-radius: 12px;
+          border: 1px solid ${t.tealBorder};
+          background: ${t.card};
+          transition: border-color 0.25s, box-shadow 0.25s;
+          margin-bottom: 0.8rem;
+          overflow: hidden;
+        }
+        .proj-card:hover { border-color: ${t.tealMid}; box-shadow: 0 4px 20px ${t.tealDim}; }
+        .proj-card.expanded { border-color: ${t.teal}; }
+
+        /* ── Exercise button ── */
+        .exercise-btn {
+          display: inline-flex; align-items: center; gap: 0.4rem;
+          padding: 0.38rem 0.85rem; border-radius: 6px;
+          font-family: 'Rajdhani', sans-serif;
+          font-size: 0.8rem; font-weight: 700;
+          letter-spacing: 0.5px; text-decoration: none;
+          border: 1px solid ${t.teal};
+          color: ${t.teal};
+          background: ${t.tealDim};
+          transition: all 0.2s;
+          white-space: nowrap; flex-shrink: 0;
+        }
+        .exercise-btn:hover {
+          background: ${t.teal};
+          color: #0a0e1a;
+          box-shadow: 0 0 14px ${t.tealMid};
+          transform: translateY(-1px);
+        }
+        .exercise-btn .btn-icon { font-size: 0.7rem; }
 
         .level-btn {
           display: flex; align-items: center; gap: 0.6rem;
@@ -158,46 +174,13 @@ export default function Specialist() {
         .tab-btn:hover { color: ${t.text}; }
         .tab-btn.active { color: ${t.teal}; border-bottom-color: ${t.teal}; }
 
-        .content-card {
-          display: flex; align-items: flex-start; gap: 1rem;
-          padding: 1.2rem 1.4rem; border-radius: 12px;
-          border: 1px solid ${t.tealBorder};
-          background: ${t.card};
-          transition: all 0.25s; margin-bottom: 0.8rem;
-        }
-        .content-card:hover {
-          border-color: ${t.tealMid};
-          transform: translateX(4px);
-          box-shadow: 0 4px 20px ${t.tealDim};
-        }
-
-        .proj-card {
-          border-radius: 12px;
-          border: 1px solid ${t.tealBorder};
-          background: ${t.card};
-          transition: border-color 0.25s, box-shadow 0.25s;
-          margin-bottom: 0.8rem;
-          overflow: hidden;
-        }
-        .proj-card:hover {
-          border-color: ${t.tealMid};
-          box-shadow: 0 4px 20px ${t.tealDim};
-        }
-        .proj-card.expanded {
-          border-color: ${t.teal};
-        }
-
         .resource-link {
           text-decoration: none; display: flex; align-items: flex-start;
           gap: 1rem; padding: 1.2rem 1.4rem; border-radius: 12px;
           border: 1px solid ${t.tealBorder}; background: ${t.card};
           transition: all 0.25s; margin-bottom: 0.8rem; color: inherit;
         }
-        .resource-link:hover {
-          border-color: ${t.teal};
-          transform: translateX(4px);
-          box-shadow: 0 4px 20px ${t.tealDim};
-        }
+        .resource-link:hover { border-color: ${t.teal}; transform: translateX(4px); box-shadow: 0 4px 20px ${t.tealDim}; }
 
         .cert-link {
           text-decoration: none; display: flex; align-items: center;
@@ -205,11 +188,7 @@ export default function Specialist() {
           border: 1px solid ${t.tealBorder}; background: ${t.card};
           transition: all 0.25s; margin-bottom: 0.8rem; color: inherit;
         }
-        .cert-link:hover {
-          border-color: ${accent};
-          transform: translateX(4px);
-          box-shadow: 0 4px 20px ${accentDim};
-        }
+        .cert-link:hover { border-color: ${accent}; transform: translateX(4px); box-shadow: 0 4px 20px ${accentDim}; }
 
         .fade-0 { animation: fadeSlideUp 0.6s ease both; }
         .fade-1 { animation: fadeSlideUp 0.6s ease 0.1s both; }
@@ -255,7 +234,6 @@ export default function Specialist() {
 
             <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.5rem' }}>
               <div style={{ flex: 1 }}>
-                {/* Team badge */}
                 <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: accentDim, border: `1px solid ${accentBorder}`, borderRadius: 50, padding: '0.3rem 1rem', fontSize: '0.75rem', color: accent, letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '1rem' }}>
                   <span>{isBlue ? '🛡️' : '⚔️'}</span>
                   {specialist.team_name}
@@ -270,7 +248,6 @@ export default function Specialist() {
                 </p>
               </div>
 
-              {/* Income badge */}
               {specialist.avg_income && (
                 <div style={{ background: accentDim, border: `1px solid ${accentBorder}`, borderRadius: 12, padding: '1rem 1.5rem', textAlign: 'center', flexShrink: 0 }}>
                   <div style={{ fontSize: '0.7rem', color: t.textDim, letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '0.4rem' }}>Avg Income</div>
@@ -347,7 +324,7 @@ export default function Specialist() {
                           className={`proj-card ${isOpen ? 'expanded' : ''}`}
                           style={{ animationDelay: `${i * 0.05}s` }}
                         >
-                          {/* ── Clickable header row ── */}
+                          {/* ── Header row (click to expand) ── */}
                           <div
                             className={`proj-row ${hasDesc ? 'clickable' : ''}`}
                             onClick={() => hasDesc && toggleProject(i)}
@@ -358,7 +335,7 @@ export default function Specialist() {
                             </div>
 
                             {/* Title + difficulty */}
-                            <div style={{ flex: 1 }}>
+                            <div style={{ flex: 1, minWidth: 0 }}>
                               <div style={{ fontSize: '1rem', fontWeight: 600, color: t.text, marginBottom: p.difficulty ? '0.3rem' : 0 }}>
                                 {p.title}
                               </div>
@@ -369,13 +346,31 @@ export default function Specialist() {
                               )}
                             </div>
 
-                            {/* Arrow toggle */}
-                            {hasDesc && (
-                              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: isOpen ? t.teal : t.textDim, fontSize: '0.8rem', fontFamily: "'Rajdhani',sans-serif", fontWeight: 600, flexShrink: 0, transition: 'color 0.2s' }}>
-                                <span>{isOpen ? 'Hide' : 'Show'}</span>
-                                <span className={`proj-arrow ${isOpen ? 'open' : ''}`} style={{ color: isOpen ? t.teal : t.textDim }}>▼</span>
-                              </div>
-                            )}
+                            {/* Right controls */}
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.7rem', flexShrink: 0 }}>
+
+                              {/* ── Start Exercise button — only shown if URL exists ── */}
+                              {p.url && (
+                                <a
+                                  href={p.url}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  className="exercise-btn"
+                                  onClick={e => e.stopPropagation()}
+                                >
+                                  <span className="btn-icon">▶</span>
+                                  Start Exercise
+                                </a>
+                              )}
+
+                              {/* Expand/collapse arrow */}
+                              {hasDesc && (
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', color: isOpen ? t.teal : t.textDim, fontSize: '0.8rem', fontFamily: "'Rajdhani',sans-serif", fontWeight: 600, transition: 'color 0.2s', userSelect: 'none' }}>
+                                  <span>{isOpen ? 'Hide' : 'Details'}</span>
+                                  <span className={`proj-arrow ${isOpen ? 'open' : ''}`} style={{ color: isOpen ? t.teal : t.textDim }}>▼</span>
+                                </div>
+                              )}
+                            </div>
                           </div>
 
                           {/* ── Collapsible description ── */}
@@ -386,7 +381,7 @@ export default function Specialist() {
                                 <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: '0.55rem' }}>
                                   {descLines.map((line, li) => {
 
-                                    // Bold header → **text**
+                                    // **Bold header**
                                     if (isHeader(line)) {
                                       return (
                                         <li key={li} style={{ fontWeight: 700, color: t.teal, fontSize: '0.82rem', letterSpacing: '1px', textTransform: 'uppercase', marginTop: li > 0 ? '0.4rem' : 0 }}>
@@ -395,7 +390,7 @@ export default function Specialist() {
                                       )
                                     }
 
-                                    // Numbered line → 1. text
+                                    // 1. Numbered step
                                     const numMatch = line.match(/^(\d+)\.\s*(.+)/)
                                     if (numMatch) {
                                       return (
@@ -408,7 +403,7 @@ export default function Specialist() {
                                       )
                                     }
 
-                                    // Plain bullet line
+                                    // › Plain bullet
                                     return (
                                       <li key={li} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', fontSize: '0.88rem', lineHeight: 1.65 }}>
                                         <span style={{ color: t.teal, fontSize: '1rem', marginTop: '0.05rem', flexShrink: 0, lineHeight: 1.4 }}>›</span>
