@@ -4,6 +4,7 @@ import API from '../api/config'
 import Navbar from '../components/Navbar'
 import { useTheme } from '../context/ThemeContext'
 
+
 export default function Admin() {
   const navigate = useNavigate()
   const { t, darkMode } = useTheme()

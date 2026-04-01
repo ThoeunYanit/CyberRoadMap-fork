@@ -3,6 +3,9 @@ import { useNavigate, useParams } from 'react-router-dom'
 import API from '../api/config'
 import Navbar from '../components/Navbar'
 import { useTheme } from '../context/ThemeContext'
+import BlueTeamImg from '../assets/images/Blue_Team.png'
+import RedTeamImg from '../assets/images/Red_Team.png'
+import MoneyImg from '../assets/images/Money.png'
 
 export default function Specialist() {
   const navigate = useNavigate()
@@ -235,7 +238,7 @@ export default function Specialist() {
             <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.5rem' }}>
               <div style={{ flex: 1 }}>
                 <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: accentDim, border: `1px solid ${accentBorder}`, borderRadius: 50, padding: '0.3rem 1rem', fontSize: '0.75rem', color: accent, letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '1rem' }}>
-                  <span>{isBlue ? '🛡️' : '⚔️'}</span>
+                  <img src={isBlue ? BlueTeamImg : RedTeamImg} alt={isBlue ? 'Blue Team' : 'Red Team'} style={{ width:38, height:38, objectFit:'contain' }} />
                   {specialist.team_name}
                 </div>
 
@@ -251,7 +254,10 @@ export default function Specialist() {
               {specialist.avg_income && (
                 <div style={{ background: accentDim, border: `1px solid ${accentBorder}`, borderRadius: 12, padding: '1rem 1.5rem', textAlign: 'center', flexShrink: 0 }}>
                   <div style={{ fontSize: '0.7rem', color: t.textDim, letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '0.4rem' }}>Avg Income</div>
-                  <div style={{ fontFamily: "'Orbitron',monospace", fontSize: '0.95rem', fontWeight: 700, color: accent }}>💰 {specialist.avg_income}</div>
+                  <div style={{ fontFamily: "'Orbitron',monospace", fontSize: '0.95rem', fontWeight: 700, color: accent, display:'flex', alignItems:'center', gap:'0.4rem' }}>
+                    <img src={MoneyImg} alt="Income" style={{ width:43, height:43, objectFit:'contain' }} />
+                    {specialist.avg_income}
+                  </div>
                 </div>
               )}
             </div>

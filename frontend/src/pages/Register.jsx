@@ -3,6 +3,8 @@ import { useNavigate, Link } from 'react-router-dom'
 import API from '../api/config'
 import Navbar from '../components/Navbar'
 import { useTheme } from '../context/ThemeContext'
+import SeeImg from '../assets/images/See.png'
+import HideImg from '../assets/images/Hide.png'
 
 export default function Register() {
   const navigate = useNavigate()
@@ -77,7 +79,7 @@ export default function Register() {
       <div style={{ position:'relative', zIndex:1, minHeight:'100vh', display:'flex', alignItems:'center', justifyContent:'center', padding:'6rem 2rem 4rem' }}>
         <div style={{ width:'100%', maxWidth:440, animation:'fadeSlideUp 0.6s ease both' }}>
           <div style={{ textAlign:'center', marginBottom:'2rem' }}>
-            <div style={{ fontFamily:"'Orbitron',monospace", fontSize:'1.5rem', fontWeight:900, color:t.teal, marginBottom:'0.5rem' }}>Cyber.road</div>
+            <div style={{ fontFamily:"'Orbitron',monospace", fontSize:'1.5rem', fontWeight:900, color:t.teal, marginBottom:'0.5rem' }}>CyberRoadMap</div>
             <div style={{ color:t.textDim, fontSize:'0.9rem' }}>Create your account and start your journey</div>
           </div>
 
@@ -118,7 +120,9 @@ export default function Register() {
                 <label style={{ display:'block', fontSize:'0.8rem', color:t.textDim, marginBottom:'0.5rem', letterSpacing:'1px', textTransform:'uppercase' }}>Password</label>
                 <div style={{ position:'relative' }}>
                   <input className="auth-input" type={showPassword?'text':'password'} placeholder="••••••••" value={form.password} onChange={e => setForm({...form,password:e.target.value})} required />
-                  <button type="button" className="show-btn" onClick={() => setShowPassword(!showPassword)}>{showPassword?'🙈':'👁️'}</button>
+                  <button type="button" className="show-btn" onClick={() => setShowPassword(!showPassword)}>
+                    <img src={showPassword ? HideImg : SeeImg} alt="toggle" style={{ width:35, height:35, objectFit:'contain' }} />
+                  </button>
                 </div>
                 {form.password && <div style={{ marginTop:'0.4rem', fontSize:'0.8rem', color:passwordRegex.test(form.password)?t.teal:t.errorText }}>{passwordRegex.test(form.password)?'✓ Strong password':'✗ Min 8 chars, uppercase, lowercase, number, special char'}</div>}
               </div>
@@ -126,7 +130,9 @@ export default function Register() {
                 <label style={{ display:'block', fontSize:'0.8rem', color:t.textDim, marginBottom:'0.5rem', letterSpacing:'1px', textTransform:'uppercase' }}>Confirm Password</label>
                 <div style={{ position:'relative' }}>
                   <input className="auth-input" type={showConfirm?'text':'password'} placeholder="••••••••" value={form.confirm} onChange={e => setForm({...form,confirm:e.target.value})} required />
-                  <button type="button" className="show-btn" onClick={() => setShowConfirm(!showConfirm)}>{showConfirm?'🙈':'👁️'}</button>
+                  <button type="button" className="show-btn" onClick={() => setShowConfirm(!showConfirm)}>
+                    <img src={showConfirm ? HideImg : SeeImg} alt="toggle" style={{ width:35, height:35, objectFit:'contain' }} />
+                  </button>
                 </div>
                 {form.confirm && <div style={{ marginTop:'0.4rem', fontSize:'0.8rem', color:form.password===form.confirm?t.teal:t.errorText }}>{form.password===form.confirm?'✓ Passwords match':'✗ Passwords do not match'}</div>}
               </div>

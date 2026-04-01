@@ -4,6 +4,8 @@ import API from '../api/config'
 import Navbar from '../components/Navbar'
 import { useTheme } from '../context/ThemeContext'
 import { getSlug } from '../api/slugMap'
+import blueImg from '../assets/images/Blue_Team.jpg'
+import redImg from '../assets/images/Red_Team.jpg'
 
 export default function Dashboard() {
   const navigate = useNavigate()
@@ -116,7 +118,9 @@ export default function Dashboard() {
                 <div key={team.name} className={`team-card ${loaded?`fade-${ti+2}`:''}`} style={{ background:t.card, border:`1px solid ${accentBorder}`, padding:'2rem' }}>
                   <div style={{ position:'absolute', top:0, left:0, right:0, height:2, background:`linear-gradient(90deg,transparent,${accent},transparent)` }} />
                   <div style={{ display:'flex', alignItems:'center', gap:'1rem', marginBottom:'1.5rem' }}>
-                    <div style={{ width:52, height:52, borderRadius:12, display:'flex', alignItems:'center', justifyContent:'center', fontSize:'1.6rem', background:accentDim, border:`1px solid ${accentBorder}` }}>{blue?'🛡️':'⚔️'}</div>
+                    <div style={{ width:52, height:52, borderRadius:12, overflow:'hidden', border:`1px solid ${accentBorder}` }}>
+                      <img src={blue ? blueImg : redImg} alt={blue ? 'Blue Team' : 'Red Team'} style={{ width:'100%', height:'100%', objectFit:'cover' }} />
+                    </div>
                     <div>
                       <div style={{ fontFamily:"'Orbitron',monospace", fontSize:'1.1rem', fontWeight:700, color:accent }}>{team.name}</div>
                       <div style={{ fontSize:'0.82rem', color:t.textDim, marginTop:'0.2rem' }}>{blue?'Defensive Security':'Offensive Security'}</div>

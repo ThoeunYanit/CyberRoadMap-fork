@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import API from '../api/config'
 import Navbar from '../components/Navbar'
 import { useTheme } from '../context/ThemeContext'
+import KnowPathImg from '../assets/images/Know_Path.png'
+import NotSureImg from '../assets/images/Not_Sure.png'
 
 export default function CareerSelect() {
   const navigate = useNavigate()
@@ -103,7 +105,7 @@ export default function CareerSelect() {
 
           <div className="choice-card" onClick={() => handleChoice('yes')} onMouseEnter={() => setHoveredCard('yes')} onMouseLeave={() => setHoveredCard(null)}>
             <div className="card-scan" />
-            <div style={{ fontSize:'3rem', marginBottom:'1rem' }}>🎯</div>
+            <img src={KnowPathImg} alt="Know Path" style={{ width:180, height:180, objectFit:'contain', marginBottom:'1rem' }} />
             <div style={{ fontFamily:"'Orbitron',monospace", fontSize:'1.1rem', fontWeight:700, color:hoveredCard==='yes'?t.teal:t.text, marginBottom:'0.8rem', transition:'color 0.3s' }}>Yes, I know</div>
             <p style={{ fontSize:'0.9rem', color:t.textDim, lineHeight:1.6, marginBottom:'1.5rem' }}>I already have a career path in mind. Take me directly to the dashboard to explore.</p>
             <button className="explore-btn">Go to Dashboard →</button>
@@ -117,7 +119,7 @@ export default function CareerSelect() {
 
           <div className="choice-card" onClick={() => handleChoice('no')} onMouseEnter={() => setHoveredCard('no')} onMouseLeave={() => setHoveredCard(null)}>
             <div className="card-scan" />
-            <div style={{ fontSize:'3rem', marginBottom:'1rem' }}>🤔</div>
+            <img src={NotSureImg} alt="Not Sure" style={{ width:180, height:180, objectFit:'contain', marginBottom:'1rem' }} />
             <div style={{ fontFamily:"'Orbitron',monospace", fontSize:'1.1rem', fontWeight:700, color:hoveredCard==='no'?t.teal:t.text, marginBottom:'0.8rem', transition:'color 0.3s' }}>Not sure yet</div>
             <p style={{ fontSize:'0.9rem', color:t.textDim, lineHeight:1.6, marginBottom:'1.5rem' }}>Help me find my path! Answer a few questions and our AI will recommend the best career for me.</p>
             <button className="explore-btn">Find My Path →</button>
