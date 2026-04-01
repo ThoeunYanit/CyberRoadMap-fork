@@ -86,23 +86,33 @@ export default function Navbar({ activePage = 'home' }) {
           style={{ display:'flex', alignItems:'center', gap:'0.6rem', cursor:'pointer' }}
           onClick={() => navigate('/')}
         >
-          <div style={{ width:32, height:32, border:`2px solid ${t.teal}`, display:'flex', alignItems:'center', justifyContent:'center', fontSize:14, background:t.tealDim, clipPath:'polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%)', transition:'all 0.3s' }}>⬡</div>
-          Cyber.road
+          <img
+            src={LogoImg}
+            alt="CyberRoadMap Logo"
+            style={{
+              height: 60,
+              width: 'auto',
+              objectFit: 'contain',
+            }}
+          />
+          <span style={{ fontFamily:"'Orbitron',monospace", fontSize:'1rem', fontWeight:700, color:t.teal }}>
+            CyberRoadMap
+          </span>
         </div>
 
         {/* Show different nav based on login status */}
-{token && (
-  <div className="nav-center-pill" style={{ display:'flex', alignItems:'center', gap:'0.3rem', background:t.tealDim, border:`1px solid ${t.tealBorder}`, borderRadius:50, padding:'0.4rem 0.8rem', transition:'all 0.3s' }}>
-    <span style={{ color:`${t.tealMid}`, fontSize:'1rem', padding:'0 0.3rem' }}>☰</span>
-    <button className={`nav-link-item ${activePage==='dashboard'?'active':''}`} onClick={() => navigate('/dashboard')}>Dashboard</button>
-    <div style={{ width:1, height:16, background:t.tealBorder }} />
-    <button className={`nav-link-item ${activePage==='profile'?'active':''}`} onClick={() => navigate('/profile')}>Profile</button>
-    {localStorage.getItem('role') === 'admin' && <>
-      <div style={{ width:1, height:16, background:t.tealBorder }} />
-      <button className={`nav-link-item ${activePage==='admin'?'active':''}`} onClick={() => navigate('/admin')} style={{ color: activePage==='admin' ? t.teal : '#f6ad55' }}>⚙️ Admin</button>
-    </>}
-  </div>
-)}
+        {token && (
+          <div className="nav-center-pill" style={{ display:'flex', alignItems:'center', gap:'0.3rem', background:t.tealDim, border:`1px solid ${t.tealBorder}`, borderRadius:50, padding:'0.4rem 0.8rem', transition:'all 0.3s' }}>
+            <span style={{ color:`${t.tealMid}`, fontSize:'1rem', padding:'0 0.3rem' }}>☰</span>
+            <button className={`nav-link-item ${activePage==='dashboard'?'active':''}`} onClick={() => navigate('/dashboard')}>Dashboard</button>
+            <div style={{ width:1, height:16, background:t.tealBorder }} />
+            <button className={`nav-link-item ${activePage==='profile'?'active':''}`} onClick={() => navigate('/profile')}>Profile</button>
+            {localStorage.getItem('role') === 'admin' && <>
+              <div style={{ width:1, height:16, background:t.tealBorder }} />
+              <button className={`nav-link-item ${activePage==='admin'?'active':''}`} onClick={() => navigate('/admin')} style={{ color: activePage==='admin' ? t.teal : '#f6ad55' }}>⚙️ Admin</button>
+            </>}
+          </div>
+        )}
         {/* Right side */}
         <div style={{ display:'flex', alignItems:'center', gap:'0.8rem' }}>
           {/* Theme toggle */}
