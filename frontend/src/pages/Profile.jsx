@@ -4,9 +4,6 @@ import API from '../api/config'
 import Navbar from '../components/Navbar'
 import { useTheme } from '../context/ThemeContext'
 import { getSlug } from '../api/slugMap'
-import RetakeImg from '../assets/images/Retake.png'
-import DashboardImg from '../assets/images/Dashboard.png'
-import LogoutImg from '../assets/images/Logout.png'
 
 export default function Profile() {
   const navigate = useNavigate()
