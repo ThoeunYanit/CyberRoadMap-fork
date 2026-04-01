@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { useTheme } from '../context/ThemeContext'
-import MoonImg from '../assets/images/Moon.jpg'
-import SunImg from '../assets/images/Sun.jpg'
+import MoonImg from '../assets/images/Moon.png'
+import SunImg from '../assets/images/Sun.png'
 import LogoImg from '../assets/images/Logo.png'
 
 export default function Navbar({ activePage = 'home' }) {
@@ -122,9 +122,7 @@ export default function Navbar({ activePage = 'home' }) {
             style={{
               width: 28,
               height: 28,
-              borderRadius: '50%',
               objectFit: 'cover',
-              border: `1px solid ${t.tealBorder}`
             }}
           />
           <div className="nav-toggle" onClick={toggleTheme}>
