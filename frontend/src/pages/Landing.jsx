@@ -257,8 +257,13 @@ export default function Landing() {
       </section>
 
       {/* ── FOOTER ── */}
+<<<<<<< HEAD
       <footer style={{ position: 'relative', zIndex: 1, textAlign: 'center', padding: '2rem 1rem', borderTop: `1px solid ${t.tealBorder}`, color: t.textDim, fontSize: '0.85rem', letterSpacing: '0.5px', transition: 'all 0.3s' }}>
         Built for cybersecurity learners — <span style={{ color: t.teal }}>CyberRoadMap</span> © 2025
+=======
+      <footer style={{ position: 'relative', zIndex: 1, textAlign: 'center', padding: '2rem', borderTop: `1px solid ${t.tealBorder}`, color: t.textDim, fontSize: '0.85rem', letterSpacing: '0.5px', transition: 'all 0.3s' }}>
+        Built for cybersecurity learners — <span style={{ color: t.teal }}>CyberRoadMap</span> © 2026
+>>>>>>> e63730b6f904b886ed4fab3b4dff7af87e8be2c2
       </footer>
     </div>
   )
